@@ -14,6 +14,22 @@
     <link rel="stylesheet" href="main.css" />
   </head>
   <body>
+    <div class="black-bg">
+      <div class="white-bg">
+        <h4>로그인하세요</h4>
+        <form action="success.html">
+          <div class="my-3">
+            <input type="text" class="form-control" id="email" />
+          </div>
+          <div class="my-3">
+            <input type="password" class="form-control" id="password" />
+          </div>
+          <button type="submit" class="btn btn-primary" id="send">전송</button>
+          <button type="button" class="btn btn-danger" id="close">닫기</button>
+        </form>
+      </div>
+    </div>
+
     <nav class="navbar navbar-light bg-light">
       <div class="container-fluid">
         <span class="navbar-brand">Navbar</span>
@@ -31,15 +47,69 @@
       <li class="list-group-item">And a fifth one</li>
     </ul>
 
+    <button class="login">로그인</button>
+
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+      integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
     <script>
+      //jquery문법으로 바꾸기
+      //document.querySelector('hello').innerHTML = "바보"
+      //   $(".hello").html("바보");
+      //   $(".hello").addClass("show");
+
+      //   //jquery는 한번에 다 버꿔줌
+      //   //document.querySelectorAll('.hello')[0].innerHTML = '바보'
+      //   $(".hello").html("바보");
+
+      //   //documnet.querySelector('#test-btn').addEventListener()
+      //   $("#test-btn").on("click", function () {
+      //     console.log(" addevent 리스너도 코드가 반으로 줄음");
+      //     $(".hello").slideUp();
+      //     //jquery로 찾으면 항상 queryMethod만
+      //   });
+
       //querySelector 사용해도 됨 특징 : 맨 위에 나오는 한개만 찾아줌
       //그래서 querySelectorAll('')[a] 이런 식으로 사용
+
+      //   $(".login").on("click", function () {
+      //     $(".black-bg").show();
+      //   });
+
+      $(".btn-danger").on("click", function () {
+        $(".black-bg").hide();
+      });
+
+      document.querySelector(".login").addEventListener("click", function () {
+        document.querySelector(".black-bg").classList.add("show-modal");
+      });
+
       document
         .querySelector(".navbar-toggler")
         .addEventListener("click", function () {
           document.querySelector(".list-group").classList.toggle("show");
         });
+
+      //   document
+      //     .getElementsByTagName("form")
+      //     .addEventListener("submit", function (e) {
+      //       if (document.getElementById("email").value == "") {
+      //         e.preventDefault();
+      //         alert("안녕하세요");
+      //       }
+      //     });
+
+      $("form").on("submit", function () {
+        if (document.getElementById("email").value == "") {
+          alert("아이디 입력하쇼");
+        }
+      });
     </script>
+
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
