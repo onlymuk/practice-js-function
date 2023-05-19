@@ -22,7 +22,7 @@
             <input type="text" class="form-control" id="email" />
           </div>
           <div class="my-3">
-            <input type="password" class="form-control" id="password" />
+            <input type="password" class="form-control" id="pw" />
           </div>
           <button type="submit" class="btn btn-primary" id="send">전송</button>
           <button type="button" class="btn btn-danger" id="close">닫기</button>
@@ -94,18 +94,15 @@
           document.querySelector(".list-group").classList.toggle("show");
         });
 
-      //   document
-      //     .getElementsByTagName("form")
-      //     .addEventListener("submit", function (e) {
-      //       if (document.getElementById("email").value == "") {
-      //         e.preventDefault();
-      //         alert("안녕하세요");
-      //       }
-      //     });
-
-      $("form").on("submit", function () {
+      $("form").on("submit", function (e) {
         if (document.getElementById("email").value == "") {
           alert("아이디 입력하쇼");
+        }
+        if (document.getElementById("pw").value == "") {
+          alert("비번 입력하쇼");
+        }
+        if (document.getElementById("pw").value.length < 6) {
+          alert("왜케 비번이 짧음?");
         }
       });
     </script>
