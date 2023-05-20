@@ -14,6 +14,8 @@
     <link rel="stylesheet" href="main.css" />
   </head>
   <body>
+    <span class="badge bg-dark ms-auto mx-3">Dark 🔄</span>
+
     <div class="black-bg">
       <div class="white-bg">
         <h4>로그인하세요</h4>
@@ -30,7 +32,7 @@
       </div>
     </div>
 
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-dark bg-dark">
       <div class="container-fluid">
         <span class="navbar-brand">Navbar</span>
         <button class="navbar-toggler" type="button">
@@ -48,6 +50,10 @@
     </ul>
 
     <button class="login">로그인</button>
+
+    <p>태조 이성계가 태어난 년도는?</p>
+    <input type="text" id="answer" />
+    <button id="send-answer">제출</button>
 
     <script
       src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
@@ -80,31 +86,59 @@
       //     $(".black-bg").show();
       //   });
 
-      $(".btn-danger").on("click", function () {
-        $(".black-bg").hide();
-      });
+      // $(".btn-danger").on("click", function () {
+      //   $(".black-bg").hide();
+      // });
 
-      document.querySelector(".login").addEventListener("click", function () {
-        document.querySelector(".black-bg").classList.add("show-modal");
-      });
+      // document.querySelector(".login").addEventListener("click", function () {
+      //   document.querySelector(".black-bg").classList.add("show-modal");
+      // });
 
+      // document
+      //   .querySelector(".navbar-toggler")
+      //   .addEventListener("click", function () {
+      //     document.querySelector(".list-group").classList.toggle("show");
+      //   });
+
+      // $("form").on("submit", function (e) {
+      //   if (document.getElementById("email").value == "") {
+      //     alert("아이디 입력하쇼");
+      //   }
+      //   if (document.getElementById("pw").value == "") {
+      //     alert("비번 입력하쇼");
+      //   }
+      //   if (document.getElementById("pw").value.length < 6) {
+      //     alert("왜케 비번이 짧음?");
+      //   }
+      // });
+
+      // let count = 0;
+
+      // document
+      //   .getElementsByClassName("badge")[0]
+      //   .addEventListener("click", function () {
+      //     count++;
+      //     if (count % 2 === 0) {
+      //       document.getElementsByClassName("badge")[0].innerHTML = "Dark 🔄";
+      //     } else {
+      //       document.getElementsByClassName("badge")[0].innerHTML = "Light 🔄";
+      //     }
+      //   });
+
+      const year = 1335;
+      let cnt = 0;
       document
-        .querySelector(".navbar-toggler")
+        .querySelector("#send-answer")
         .addEventListener("click", function () {
-          document.querySelector(".list-group").classList.toggle("show");
+          cnt++;
+          if (document.getElementById("answer").value == year) {
+            alert("성공");
+          } else {
+            if (cnt === 3) {
+              alert("멍청아");
+            }
+          }
         });
-
-      $("form").on("submit", function (e) {
-        if (document.getElementById("email").value == "") {
-          alert("아이디 입력하쇼");
-        }
-        if (document.getElementById("pw").value == "") {
-          alert("비번 입력하쇼");
-        }
-        if (document.getElementById("pw").value.length < 6) {
-          alert("왜케 비번이 짧음?");
-        }
-      });
     </script>
 
     <script

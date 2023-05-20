@@ -25,6 +25,10 @@
     padding: 30px;
   } 
 
+  .dark{
+    background: black;
+    color: white;
+  }
 
   .show-modal{
     visibility: visible;
