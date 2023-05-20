@@ -12,8 +12,30 @@
       crossorigin="anonymous"
     />
     <link rel="stylesheet" href="main.css" />
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+      integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
   </head>
   <body>
+    <nav class="navbar bg-body-tertiary con1">
+      <div class="container-fluid">
+        <a class="navbar-brand con">JS-shop</a>
+        <form class="d-flex" role="search">
+          <input
+            class="form-control me-2"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+          <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+      </div>
+    </nav>
+    <div class="percent"></div>
+
     <span class="badge bg-dark ms-auto mx-3">Dark 🔄</span>
 
     <div class="black-bg">
@@ -55,12 +77,55 @@
     <input type="text" id="answer" />
     <button id="send-answer">제출</button>
 
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
-      integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
+    <div class="alert alert-danger">
+      <span id="num">5</span>초 이내 구매시 사은품 증정!
+    </div>
+
+    <div style="overflow: hidden">
+      <div class="slide-container">
+        <div class="slide-box">
+          <img src="car1.png" />
+        </div>
+        <div class="slide-box">
+          <img src="car2.png" />
+        </div>
+        <div class="slide-box">
+          <img src="car3.png" />
+        </div>
+      </div>
+    </div>
+
+    <button class="prev">이전</button>
+    <button class="slide-1">1</button>
+    <button class="slide-2">2</button>
+    <button class="slide-3">3</button>
+    <button class="next">다음</button>
+
+    <div class="lorem" style="width: 200px; height: 100px; overflow-y: scroll">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Eos quod cum iste
+      debitis necessitatibus, culpa fugit, sapiente dolores sed ipsa, dolore ex
+      consectetur distinctio laudantium omnis iusto. Itaque, explicabo cumque?
+    </div>
+
+    <script>
+      var 스크롤양 = document.querySelector(".lorem").scrollTop;
+      var 실제높이 = document.querySelector(".lorem").scrollHeight;
+      var 눈에보이는높이 = document.querySelector(".lorem").clientHeight;
+      document.querySelector(".lorem").addEventListener("scroll", function () {
+        if (스크롤양 + 눈에보이는높이 > 실제높이 - 10) {
+          alert("다 읽음");
+        }
+      }); //주의점 : 1. 너무 많이 쓰면 안됨 2. 중복될 수 있음
+      var scroll = document.querySelector("html").scrollTop; //현재 웹페이지 스크롤양
+      var real = document.querySelector("html").scrollHeight; //현재 웹페이지 실제높이
+      var cur = document.querySelector("html").clientHeight; //현재 웹페이지 보이는 높이임
+      document.querySelector("html").addEventListener("scroll", function () {
+        var curPercent = (scroll / (real - cur)) * 100;
+        $(".percent").width(curPercent + "%");
+      });
+    </script>
+
+    <div style="height: 1000px"></div>
 
     <script>
       //jquery문법으로 바꾸기
@@ -82,48 +147,60 @@
       //querySelector 사용해도 됨 특징 : 맨 위에 나오는 한개만 찾아줌
       //그래서 querySelectorAll('')[a] 이런 식으로 사용
 
-      //   $(".login").on("click", function () {
-      //     $(".black-bg").show();
-      //   });
-
-      // $(".btn-danger").on("click", function () {
-      //   $(".black-bg").hide();
+      // $(".login").on("click", function () {
+      //   $(".black-bg").show();
       // });
 
-      // document.querySelector(".login").addEventListener("click", function () {
-      //   document.querySelector(".black-bg").classList.add("show-modal");
-      // });
+      $(".btn-danger").on("click", function () {
+        $(".black-bg").hide();
+      });
 
-      // document
-      //   .querySelector(".navbar-toggler")
-      //   .addEventListener("click", function () {
-      //     document.querySelector(".list-group").classList.toggle("show");
-      //   });
+      document.querySelector(".login").addEventListener("click", function () {
+        document.querySelector(".black-bg").classList.add("show-modal");
+      });
 
-      // $("form").on("submit", function (e) {
-      //   if (document.getElementById("email").value == "") {
-      //     alert("아이디 입력하쇼");
-      //   }
-      //   if (document.getElementById("pw").value == "") {
-      //     alert("비번 입력하쇼");
-      //   }
-      //   if (document.getElementById("pw").value.length < 6) {
-      //     alert("왜케 비번이 짧음?");
-      //   }
-      // });
+      document
+        .querySelector(".navbar-toggler")
+        .addEventListener("click", function () {
+          document.querySelector(".list-group").classList.toggle("show");
+        });
 
-      // let count = 0;
+      $("form").on("submit", function (e) {
+        let 입력한값 = document.getElementById("email").value;
+        const regEx = /\S+@\S+|>\S+/;
+        if (입력한값 == "") {
+          alert("아이디 입력 안함");
+        }
+        if (!regEx.test(입력한값)) {
+          e.preventDefault();
+          alert("이메일형식 아님");
+        }
+        if (document.getElementById("pw").value == "") {
+          alert("비번 입력하쇼");
+          e.preventDefault();
+        }
+        if (document.getElementById("pw").value.length < 6) {
+          e.preventDefault();
+          alert("왜케 비번이 짧음?");
+        }
+        if (/[A-Z]/.test(document.getElementById("pw").value)) {
+          e.preventDefault();
+          alert("대문자 포함");
+        }
+      });
 
-      // document
-      //   .getElementsByClassName("badge")[0]
-      //   .addEventListener("click", function () {
-      //     count++;
-      //     if (count % 2 === 0) {
-      //       document.getElementsByClassName("badge")[0].innerHTML = "Dark 🔄";
-      //     } else {
-      //       document.getElementsByClassName("badge")[0].innerHTML = "Light 🔄";
-      //     }
-      //   });
+      let count = 0;
+
+      document
+        .getElementsByClassName("badge")[0]
+        .addEventListener("click", function () {
+          count++;
+          if (count % 2 === 0) {
+            document.getElementsByClassName("badge")[0].innerHTML = "Dark 🔄";
+          } else {
+            document.getElementsByClassName("badge")[0].innerHTML = "Light 🔄";
+          }
+        });
 
       const year = 1335;
       let cnt = 0;
@@ -139,6 +216,71 @@
             }
           }
         });
+
+      let num = 5;
+      setInterval(function () {
+        num--;
+        if (num >= 0) {
+          document.querySelector("#num").innerHTML = num;
+        }
+      }, 1000);
+
+      // setInterval(function () {
+      //   $(".alert").hide();
+      // }, 1000);
+
+      var 지금사진 = 1;
+
+      $(".slide-1").on("click", function () {
+        지금사진 = 0;
+        $(".slide-container").css(
+          "transform",
+          "translateX(-" + 지금사진 + "00vw)"
+        );
+      });
+
+      $(".slide-2").on("click", function () {
+        지금사진 = 1;
+        $(".slide-container").css(
+          "transform",
+          "translateX(-" + 지금사진 + "00vw)"
+        );
+      });
+
+      $(".slide-3").on("click", function () {
+        지금사진 = 2;
+        $(".slide-container").css(
+          "transform",
+          "translateX(-" + 지금사진 + "00vw)"
+        );
+      });
+
+      $(".next").on("click", function () {
+        $(".slide-container").css(
+          "transform",
+          "translateX(-" + 지금사진 + "00vw)"
+        );
+        지금사진++;
+      });
+      $(".prev").on("click", function () {
+        $(".slide-container").css(
+          "transform",
+          "translateX(-" + 지금사진 + "00vw)"
+        );
+        지금사진--;
+      });
+
+      //검출하기 위해서 window. 을 붙힌다
+      window.scrollY; //얼만큼 스크롤 했는지 scrollTo 현재위치에서 100만큼 scrollBy 현재위치부터 100까지
+      window.addEventListener("scroll", function () {
+        if (window.scrollY >= 100) {
+          var elements = document.getElementsByClassName("con")[0];
+          elements.style.fontSize = "12px";
+        } else {
+          var elements = document.getElementsByClassName("con")[0];
+          elements.style.fontSize = "30px";
+        }
+      });
     </script>
 
     <script

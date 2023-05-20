@@ -64,3 +64,8 @@ var total = 0;
 // total = first + first * (2 / 3) + first * (2 / 3) ** 2;
 total = Math.ceil(360 / (1 - 2 / 3));
 console.log(total);
+
+function vat(a) {
+  var num = (a * 1.1).toFixed(1); //소수점 두번쨰 자리까지, 하지만 문자열로 출력됨
+  return parseFloat(num); //해결하고 싶을때 parseInt나 parseFloat
+}

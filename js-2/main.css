@@ -1,0 +1,36 @@
+.list-group {
+    display: none;
+}
+.show {
+    display: block;
+}
+
+.black-bg {
+    width : 100%;
+    height : 100%;
+    position : fixed;
+    background : rgba(0,0,0,0.5);
+    z-index : 5;
+    padding: 30px;
+    /*시작스타일*/
+ /* 애니메이션은 display 말고 visibily로 사용*/
+    visibility: hidden;
+    opacity: 0;
+    /*transition 추가*/
+    transition: all 1s;
+  }
+  .white-bg {
+    background: white;
+    border-radius: 5px;
+    padding: 30px;
+  } 
+
+  .dark{
+    background: black;
+    color: white;
+  }
+
+  .show-modal{
+    visibility: visible;
+    opacity: 1;
+  }
