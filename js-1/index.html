@@ -281,8 +281,26 @@
           elements.style.fontSize = "30px";
         }
       });
+
+      const bbg = document.querySelector(".black-bg");
+
+      bbg.addEventListener("click", function (e) {
+        if (e.target == bbg) {
+          //내가 누른 화면이 까만 배경이면
+          bbg.classList.remove("show-modal");
+          // 이 클래스 이름만 닫아주세요
+        }
+      });
     </script>
 
+    <!-- 이벤트 버블링 :
+    모든 브라우저는 이벤트가 상위 html로 퍼지는 현상
+    해결 방법 함수에 파라미터 e를 쓰고 
+    e.target; : 유저가 실제로 누른 거
+    e.currentTarget; 이벤트리스너가 달린거 : this와 같음
+    e.preventDefault; 클릭 안한거 처럼 막아주세요
+    e.stopPropagation; 이벤트 버블링 막아줌 
+    함수 사용가능 -->
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
