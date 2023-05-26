@@ -104,3 +104,13 @@ function 평균(arr, po) {
 }
 평균([40, 40, 40], 20);
 평균([10, 20, 30, 40, 50], 40);
+
+var 어레이 = ["a", "b", "c"];
+어레이.sort(function (a, b) {
+  return b - a;
+});
+
+var 어레이2 = [7, 3, 5, 2, 40];
+어레이.sort(function (a, b) {
+  return a - b;
+});

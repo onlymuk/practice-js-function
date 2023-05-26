@@ -20,31 +20,17 @@
     ></script>
   </head>
   <body>
-    <div class="card-group container">
-      <div class="card">
-        <img src="https://via.placeholder.com/600" />
-        <div class="card-body">
-          <h5 class="title">Card title1</h5>
-          <p class="price">가격 : 70001</p>
-          <button class="btn btn-danger">주문하기</button>
-        </div>
-      </div>
-      <div class="card">
-        <img src="https://via.placeholder.com/600" />
-        <div class="card-body">
-          <h5 class="title">Card title1</h5>
-          <p class="price">가격 : 70001</p>
-          <button class="btn btn-danger">주문하기</button>
-        </div>
-      </div>
-      <div class="card">
-        <img src="https://via.placeholder.com/600" />
-        <div class="card-body">
-          <h5 class="title">Card title1</h5>
-          <p class="price">가격 : 70001</p>
-          <button class="btn btn-danger">주문하기</button>
-        </div>
-      </div>
+    <div class="container">
+      <div class="row"></div>
+    </div>
+    <div class="container my-3">
+      <button class="btn btn-danger" id="price">더기</button>
+    </div>
+    <div class="container my-3">
+      <button class="btn btn-danger" id="title">제목순정렬</button>
+    </div>
+    <div class="container my-3">
+      <button class="btn btn-danger" id="under">아래</button>
     </div>
 
     <script>
@@ -54,14 +40,118 @@
         { id: 2, price: 60000, title: "Black Monastery" },
       ];
 
-      var body = document.getElementsByClassName("card-body");
-      var title = document.getElementsByClassName("title");
-      var price = document.getElementsByClassName("price");
+      $("#price").click(function () {
+        products.sort(function (a, b) {
+          return a.price - b.price;
+        });
 
-      for (let i = 0; i < products.length; i++) {
-        title[i].innerHTML = products[i].title;
-        price[i].innerHTML = products[i].price;
+        $(".row").html("");
+
+        products.forEach((a, i) => {
+          var 템플릿 = `<div class="col-sm-4">
+    <img src="https://via.placeholder.com/600" class="w-100">
+    <h5>${products[i].title}</h5>
+    <p>가격 : ${products[i].price}</p>
+    <button class="buy">구매</button>
+  </div>`;
+          $(".row").append(템플릿);
+        });
+      });
+
+      $("#title").click(function () {
+        products.sort(function (a, b) {
+          return b.title > a.title;
+        });
+
+        $(".row").html("");
+
+        products.forEach((a, i) => {
+          var 템플릿 = `<div class="col-sm-4">
+    <img src="https://via.placeholder.com/600" class="w-100">
+    <h5>${products[i].title}</h5>
+    <p>가격 : ${products[i].price}</p>
+    <button class="buy">구매</button>
+  </div>`;
+          $(".row").append(템플릿);
+        });
+      });
+
+      $("#under").click(function () {
+        let under = products.filter(function (a) {
+          return a.price <= 60000;
+        });
+
+        $(".row").html("");
+
+        under.forEach((a, i) => {
+          var 템플릿 = `<div class="col-sm-4">
+    <img src="https://via.placeholder.com/600" class="w-100">
+    <h5>${a.title}</h5>
+    <p>가격 : ${a.price}</p>
+    <button class="buy">구매</button>
+  </div>`;
+          $(".row").append(템플릿);
+        });
+      });
+
+      $(".buy").click(function (e) {
+        var naming = $(e.target).siblings("h5").html();
+        if (localStorage.getItem("cart") != null) {
+          var 꺼낸거 = JSON.parse(localStorage.cart);
+          꺼낸거.push(title);
+          localStorage.setItem("cart", JSON.stringify(꺼낸거));
+        } else {
+          localStorage.setItem("cart", JSON.stringify([title]));
+        }
+      });
+      //  <div class="col-sm-4">
+      //   <img src="https://via.placeholder.com/600" class="w-100" />
+      //   <h5>Card title</h5>
+      //   <p>가격 : 70000</p>
+      // </div>
+      // for (let i = 0; i < products.length; i++) {
+      // const row = document.querySelector(".row");
+      // const col = document.createElement("div");
+      // const img = document.createElement("img");
+      // const hFive = document.createElement("h5");
+      // const p = document.createElement("p");
+      // col.className = "col-sm-4";
+      // img.src = "https://via.placeholder.com/600";
+      // img.className = "w-100";
+
+      // hFive.innerHTML = `${products[i].title}`;
+      // p.innerHTML = `가격 : ${products[i].price}`;
+      // col.appendChild(img);
+      // col.appendChild(hFive);
+      // col.appendChild(p);
+      // row.appendChild(col);
+
+      // }
+      function template(arr) {
+        arr.forEach((a, i) => {
+          const row = document.querySelector(".row");
+          var 템플릿 = `<div class="col-sm-4">
+            <img src="https://via.placeholder.com/600" class="w-100" />
+            <h5>${a.title}</h5>
+            <p>가격 : ${a.price}</p>
+            </div>`;
+
+          row.innerHTML += 템플릿;
+        });
       }
+      template(products);
+    </script>
+
+    <div class="container">
+      <button class="btn btn-danger add">더보기</button>
+    </div>
+    <script>
+      const plus = document.querySelector(".add");
+      let count = 1;
+
+      plus.addEventListener("click", function () {
+        //get으로 Url에서 데이터 가져와서 더보기 해주는 거
+      });
     </script>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
